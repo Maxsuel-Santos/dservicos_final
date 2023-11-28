@@ -1,49 +1,31 @@
 <?php
 
-namespace Atividades\Core;
-
+namespace Ifba\Core;
 
 class Database{
-
-
     protected \PDO $conexao;
     protected \PDOStatement $stmt;
 
-    public function __construct()
-    {
-        $servidor = DB['servidor'];
-        $banco = DB['banco'];
-        $usuario = DB['usuario'];
-        $senha = DB['senha'];
-
-        $dsn = "mysql:host={$servidor};dbname={$banco}";
-
-        $this->conexao = new \PDO($dsn,$usuario,$senha);       
-
-    }
-
-    public function execute(string $sql, array $dados = [] ) :bool
-    {
-        $this->stmt = $this->conexao->prepare($sql);
+    public function __construct(){
         
-        return $this->stmt->execute($dados);
-
+        $servidor = 'localhost';
+        $banco = 'atividades3mat';
+        $usuario = 'root';
+        $senha = '';
+        
+        $dsn = "mysql:host={$servidor};dbname={$banco}";
+        $this->conexao = new \PDO($dsn,$usuario,$senha);
     }
 
-    public function getAll(string $classe) :array
+    public function executaSQL(string $sql, array $dados = []): bool
     {
-
-        return $this->stmt->fetchAll(\PDO::FETCH_CLASS,$classe);
-
+        $this -> stmt = $this -> conexao -> prepare($sql);
+        return $this -> stmt -> execute($dados);
     }
 
-    public function get(string $classe)
+    public function recuperarTodos($classe = \stdClass::class)
     {
-
-        return $this->stmt->fetchObject($classe);
-
+        # FetchAll retorna um array com os dados da consulta.
+        return $this -> stmt -> fetchAll(\PDO::FETCH_CLASS, $classe);
     }
-
-
-
 }

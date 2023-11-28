@@ -1,20 +1,30 @@
 <?php
-declare(strict_types= 1);
+declare(strict_types=1);
 
-use Atividades\Core\Router;
+use Ifba\Controller\HomeController;
+use Ifba\Core\Router;
 
-require __DIR__ . "/vendor/autoload.php";
-require __DIR__. "/app/config.php";
-require __DIR__. "/app/rotas.php";
-require __DIR__. "/app/Core/helper.php";
+require_once "./vendor/autoload.php";
+require_once "./app/config.php";
 
+const URL_BASE = "http://localhost/dservicos_final";
 
+function css(string $arquivo): string
+{
+    return URL_BASE . "/public/css/{$arquivo}.css";
+}
 
-$url = $_GET['url'] ?? "";
+function linkUrl(string $rota = ""): string
+{
+    return URL_BASE . "/" . $rota;
+}
 
-Router::exec($url);
+$url = $_GET['url'] ?? '/';
 
+Router::add('/', 'HomeController', 'index');
+Router::add('login', 'HomeController', 'login');
+Router::add('criarconta', 'HomeController', 'criarconta');
+Router::add('listar', 'HomeController', 'listarUsuarios');
+Router::add('__erro', 'ErroController', 'erro404');
 
-
-
-
+Router::execute($url);

@@ -1,65 +1,37 @@
 <?php
 
-namespace Atividades\Core;
+namespace Ifba\Core;
 
 class Router{
+    # Métodos e propriedades estáticos (static) são aqueles que pertecem a classe e não aos seus objetos. Não existe para acessá-los a necessidade de se ter um objeto baseado nesta classes.
 
-    #Metodos e Propriedades Estáticas (static) são aqueles que não pertecem aos objetos instanciados de uma classe mas sim a propria classe e podem ser instanciados diretamente pela classe.
+    protected static array $rotas = [];
 
-    protected static array $rotas = []; 
-
-    public static function add(string $rota, string $controller, string $acao)
+    public static function add($url, $controlador, $metodo)
     {
-       static::$rotas[$rota] = [$controller,$acao];
+        static::$rotas[$url] = [$controlador, $metodo];
     }
 
-    public static function exec(string $url)
+    public static function execute($url)
     {
-        $url = "/".$url;
+
         $rotas = static::$rotas;
 
-        if( array_key_exists($url,$rotas) ){
-            [$controller,$metodo] = $rotas[$url];
-            static::carregarController($controller,$metodo);
-            
+        # Verifico se a url passada existe como chave no array
+        if(array_key_exists($url, $rotas))
+        {
+            [$controlador, $metodo] = $rotas[$url];
         }else{
-            static::erro('404',404);           
+            [$controlador, $metodo] = $rotas['__erro'];
         }
-        
-        
+
+        static::carregaController($controlador, $metodo);
     }
 
-
-    protected static function carregarController($controller,$metodo)
+    protected static function carregaController($controlador, $metodo)
     {
-        $controller = NS_CONTROLLERS . $controller;
-        if(class_exists($controller)){
-            $ctr = new $controller();
-            if(method_exists($ctr,$metodo)){
-                http_response_code(200);
-                $ctr->$metodo();
-            }else{
-                static::erro('metodo',405);
-            }
-            
-        }else{
-            static::erro('controller',405);
-        }
-        
-           
-       
+        $controlador = "\\Ifba\\Controller\\{$controlador}";
+        $ctr = new $controlador;
+        $ctr -> $metodo();
     }
-
-    protected static function erro(string $tipo,int $codigo = 400)
-    {
-        http_response_code($codigo);
-        $controller = NS_CONTROLLERS. 'ErroController';
-        $ctr = new $controller();
-        $ctr->erro($tipo);
-
-    }
-
-    
-
-
 }

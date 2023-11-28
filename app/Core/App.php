@@ -2,7 +2,6 @@
 
 namespace Ifba\Core;
 
-class DAO{
+class App{
 
-    
 }
