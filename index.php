@@ -8,7 +8,10 @@ require_once "./vendor/autoload.php";
 require_once "./app/config.php";
 
 const URL_BASE = "http://localhost/dservicos_final";
+<<<<<<< HEAD
 const NS_CONTROLLERS = "\\Ifba\\Controllers\\";
+=======
+>>>>>>> 4af33f51c680f390a208124014aacfabae9bde15
 
 function css(string $arquivo): string
 {
@@ -23,6 +26,7 @@ function linkUrl(string $rota = ""): string
 $url = $_GET['url'] ?? '/';
 
 Router::add('/', 'HomeController', 'index');
+<<<<<<< HEAD
 Router::add('login', 'LoginController', 'login');
 Router::add('eletricista', 'HomeController', 'eletricista');
 //Router::add('criarconta', 'HomeController', 'criarconta');
@@ -34,3 +38,11 @@ Router::add('cadastrofeito', 'HomeController', 'cadastrofeito');
 Router::add('__erro', 'ErroController', 'erro404');
 
 Router::execute($url);
+=======
+Router::add('login', 'HomeController', 'login');
+Router::add('criarconta', 'HomeController', 'criarconta');
+Router::add('listar', 'HomeController', 'listarUsuarios');
+Router::add('__erro', 'ErroController', 'erro404');
+
+Router::execute($url);
+>>>>>>> 4af33f51c680f390a208124014aacfabae9bde15
