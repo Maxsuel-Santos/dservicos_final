@@ -10,7 +10,6 @@ use Ifba\Model\Entities\Usuario;
 class HomeController extends Controller{
 
     public function index(){
-<<<<<<< HEAD
         /*$dados = [
             'titulo' => 'D+ Serviços',
             'data' => date('d/m/Y h:i:s')
@@ -40,7 +39,6 @@ class HomeController extends Controller{
     }
 
     /*public function criarconta()
-=======
         $dados = [
             'titulo' => 'D+ Serviços',
             'data' => date('d/m/Y h:i:s')
@@ -55,7 +53,6 @@ class HomeController extends Controller{
     }
 
     public function criarconta()
->>>>>>> 4af33f51c680f390a208124014aacfabae9bde15
     {
         $usuario = new Usuario;
         $usuario -> nome = "José";
@@ -73,15 +70,12 @@ class HomeController extends Controller{
         }
 
         $this -> view('conta');
-<<<<<<< HEAD
     }*/
 
     /*public function listarUsuarios()
-=======
     }
 
     public function listarUsuarios()
->>>>>>> 4af33f51c680f390a208124014aacfabae9bde15
     {
         $dao = new UsuariosDAO;
         $usuarios = $dao -> buscarTodos();
@@ -90,9 +84,7 @@ class HomeController extends Controller{
         {
             echo $usuario -> id . " - " . $usuario -> nome . "<hr>";
         }
-<<<<<<< HEAD
+
     }*/
-=======
+
     }
->>>>>>> 4af33f51c680f390a208124014aacfabae9bde15
-}
