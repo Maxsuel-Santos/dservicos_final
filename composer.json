@@ -3,13 +3,13 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Atividades\\": "app/"
+            "Ifba\\": "app/"
         }
     },
     "authors": [
         {
-            "name": "Thiago Miranda",
-            "email": "mirandathiago@gmail.com"
+            "name": "Maxsuel Santos",
+            "email": "maxsuel.ap.l.santos@gmail.com"
         }
     ],
     "require": {}

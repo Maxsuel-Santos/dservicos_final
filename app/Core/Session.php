@@ -2,7 +2,8 @@
 
 namespace Ifba\Core;
 
-class DAO{
 
-    
+class Session{
+
+
 }
